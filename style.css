@@ -31,3 +31,38 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
+
+/* Hero Section */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--secondary));
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.35rem;
+    opacity: 0.92;
+    margin-bottom: 14px;
+}
+
+.hero-desc {
+    font-size: 1.05rem;
+    opacity: 0.78;
+    line-height: 1.7;
+}
