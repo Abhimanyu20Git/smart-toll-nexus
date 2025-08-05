@@ -189,3 +189,32 @@ body {
     color: var(--text-muted);
     font-size: 0.95rem;
 }
+
+/* Footer */
+.footer {
+    background: var(--text);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero {
+        min-height: 80vh;
+        padding: 60px 16px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
