@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const role = params.get('role') || 'user';
 
+    // If already logged in, redirect
+    var savedRole = localStorage.getItem('userRole');
+    if (savedRole) {
+        window.location.href = savedRole + '-dashboard.html';
+        return;
+    }
+
     // Set role specific content
     var roleIcon = document.getElementById('roleIcon');
     var roleTitle = document.getElementById('roleTitle');
@@ -41,6 +48,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Login handler
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = document.getElementById('loginEmail').value;
+        localStorage.setItem('userRole', role);
+        localStorage.setItem('userEmail', email);
+        showToast('Login successful!');
+        setTimeout(function() {
+            window.location.href = role + '-dashboard.html';
+        }, 800);
+    });
+
     // OTP flow
     var sendOtpBtn = document.getElementById('sendOtpBtn');
     var otpSection = document.getElementById('otpSection');
@@ -52,11 +71,24 @@ document.addEventListener('DOMContentLoaded', function() {
         otpSection.style.display = 'flex';
         otpSection.style.flexDirection = 'column';
         otpSection.style.gap = '16px';
+        showToast('OTP sent to your email and phone!');
     });
 
     changeDetailsBtn.addEventListener('click', function() {
         registerFields.style.display = 'flex';
         otpSection.style.display = 'none';
+    });
+
+    // Register handler
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = document.getElementById('regEmail').value;
+        localStorage.setItem('userRole', role);
+        localStorage.setItem('userEmail', email);
+        showToast('Registration successful!');
+        setTimeout(function() {
+            window.location.href = role + '-dashboard.html';
+        }, 800);
     });
 
     // Hide vehicle field for non user roles
@@ -71,3 +103,20 @@ document.addEventListener('DOMContentLoaded', function() {
         tabs[1].click();
     }
 });
+
+// Toast notification
+function showToast(message) {
+    var existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(function() { toast.classList.add('show'); }, 10);
+    setTimeout(function() {
+        toast.classList.remove('show');
+        setTimeout(function() { toast.remove(); }, 300);
+    }, 2500);
+}
