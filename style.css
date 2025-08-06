@@ -356,3 +356,31 @@ body {
 .auth-footer a:hover {
     text-decoration: underline;
 }
+
+.otp-info {
+    background: var(--bg);
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.otp-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+}
+
+.btn-ghost:hover {
+    color: var(--text);
+}
+
+#registerFields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
