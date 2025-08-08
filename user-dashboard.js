@@ -6,9 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    var walletBalance = 250.50;
+
     document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem('userRole');
         localStorage.removeItem('userEmail');
         window.location.href = 'index.html';
     });
+
+    function updateWalletDisplay() {
+        document.getElementById('walletAmount').textContent = '$' + walletBalance.toFixed(2);
+    }
+
+    updateWalletDisplay();
 });

@@ -23,7 +23,31 @@
 
     <main class="dash-main">
         <div class="container">
-            <p>Welcome to your dashboard</p>
+            <div class="user-top-grid">
+                <!-- Wallet Card -->
+                <div class="wallet-card">
+                    <div class="wallet-label">Wallet Balance</div>
+                    <div class="wallet-amount" id="walletAmount">$250.50</div>
+                    <button class="btn btn-accent" id="rechargeBtn">Recharge Wallet</button>
+                </div>
+
+                <!-- Vehicle Info -->
+                <div class="card vehicle-card">
+                    <h3>Vehicle Info</h3>
+                    <div class="info-row">
+                        <span class="info-label">Vehicle Number</span>
+                        <span class="info-value">MH-01-AB-1234</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">RFID Status</span>
+                        <span class="info-value status-active">Active</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Last Toll</span>
+                        <span class="info-value">2025-08-07, 14:30</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
