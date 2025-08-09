@@ -51,6 +51,76 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Recharge modal
+    var modal = document.getElementById('rechargeModal');
+    var rechargeInput = document.getElementById('rechargeAmount');
+
+    document.getElementById('rechargeBtn').addEventListener('click', function() {
+        modal.classList.add('active');
+        rechargeInput.value = '';
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+
+    // Preset amount buttons
+    document.querySelectorAll('.preset-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            rechargeInput.value = btn.dataset.amount;
+        });
+    });
+
+    // Pay now
+    document.getElementById('payNowBtn').addEventListener('click', function() {
+        var amount = parseFloat(rechargeInput.value);
+        if (isNaN(amount) || amount <= 0) {
+            showToast('Please enter a valid amount');
+            return;
+        }
+
+        walletBalance += amount;
+        updateWalletDisplay();
+
+        var now = new Date();
+        var dateStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+        var timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+
+        transactions.unshift({
+            id: transactions.length + 1,
+            date: dateStr,
+            time: timeStr,
+            booth: 'Wallet Recharge',
+            amount: amount,
+            type: 'recharge'
+        });
+
+        renderTransactions();
+        modal.classList.remove('active');
+        showToast('Wallet recharged with $' + amount.toFixed(2));
+    });
+
     updateWalletDisplay();
     renderTransactions();
 });
+
+// Toast notification
+function showToast(message) {
+    var existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(function() { toast.classList.add('show'); }, 10);
+    setTimeout(function() {
+        toast.classList.remove('show');
+        setTimeout(function() { toast.remove(); }, 300);
+    }, 2500);
+}
