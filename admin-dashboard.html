@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartToll Connect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dash-header">
+        <div class="container dash-header-inner">
+            <div class="dash-brand">
+                <span class="dash-logo logo-admin">A</span>
+                <div>
+                    <h1>SmartToll Connect</h1>
+                    <p>Admin Dashboard</p>
+                </div>
+            </div>
+            <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+        </div>
+    </header>
+
+    <main class="dash-main">
+        <div class="container">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <div class="stat-label">Total Revenue</div>
+                    <div class="stat-row">
+                        <div class="stat-value">$45,231</div>
+                        <div class="stat-icon icon-success">$</div>
+                    </div>
+                    <div class="stat-change positive">+12.5% from last month</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">Toll Booths</div>
+                    <div class="stat-row">
+                        <div class="stat-value" id="boothCount">3</div>
+                        <div class="stat-icon icon-primary">B</div>
+                    </div>
+                    <div class="stat-change">Across all highways</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">Active Users</div>
+                    <div class="stat-row">
+                        <div class="stat-value">2,847</div>
+                        <div class="stat-icon icon-secondary-bg">U</div>
+                    </div>
+                    <div class="stat-change positive">+8.2% growth</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">Transactions</div>
+                    <div class="stat-row">
+                        <div class="stat-value">12,894</div>
+                        <div class="stat-icon icon-accent-bg">T</div>
+                    </div>
+                    <div class="stat-change">This month</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
