@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Dashboard Header -->
     <header class="dash-header">
         <div class="container dash-header-inner">
             <div class="dash-brand">
@@ -23,7 +22,6 @@
 
     <main class="dash-main">
         <div class="container">
-            <!-- Stats Grid -->
             <div class="stats-grid">
                 <div class="card stat-card">
                     <div class="stat-label">Total Revenue</div>
@@ -59,7 +57,6 @@
                 </div>
             </div>
 
-            <!-- Toll Booth Management -->
             <div class="card">
                 <div class="card-header booth-header">
                     <div>
@@ -72,6 +69,40 @@
             </div>
         </div>
     </main>
+
+    <!-- Add/Edit Booth Modal -->
+    <div class="modal-overlay" id="boothModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="boothModalTitle">Add Toll Booth</h3>
+                <button class="modal-close" id="closeBoothModal">&times;</button>
+            </div>
+            <p class="text-muted" id="boothModalDesc">Create a new toll booth configuration</p>
+            <form id="boothForm" style="margin-top: 16px;">
+                <div class="form-group">
+                    <label for="boothName">Booth Name</label>
+                    <input type="text" id="boothName" placeholder="Plaza A" required>
+                </div>
+                <div class="form-group">
+                    <label for="boothLocation">Location</label>
+                    <input type="text" id="boothLocation" placeholder="Highway 101 North" required>
+                </div>
+                <div class="form-group">
+                    <label for="boothLanes">Number of Lanes</label>
+                    <input type="number" id="boothLanes" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="boothOperator">Operator Name</label>
+                    <input type="text" id="boothOperator" placeholder="John Smith" required>
+                </div>
+                <div class="form-group">
+                    <label for="boothRate">Toll Rate ($)</label>
+                    <input type="number" id="boothRate" step="0.50" min="0" value="0" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" id="boothSubmitBtn">Add Booth</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="admin-dashboard.js"></script>

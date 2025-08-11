@@ -6,11 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    var nextId = 4;
     var tollBooths = [
         { id: 1, name: 'Plaza A', location: 'Highway 101 North', lanes: 4, operator: 'John Smith', rate: 15.50 },
         { id: 2, name: 'Plaza B', location: 'Highway 101 South', lanes: 6, operator: 'Jane Doe', rate: 20.00 },
         { id: 3, name: 'Plaza C', location: 'Interstate 5', lanes: 5, operator: 'Mike Johnson', rate: 12.50 }
     ];
+
+    var modal = document.getElementById('boothModal');
+    var boothForm = document.getElementById('boothForm');
 
     document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem('userRole');
@@ -42,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
             list.appendChild(div);
         });
 
-        // Delete handlers
         document.querySelectorAll('.delete-booth').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 var id = parseInt(btn.dataset.id);
@@ -52,6 +55,40 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Add booth modal
+    document.getElementById('addBoothBtn').addEventListener('click', function() {
+        document.getElementById('boothModalTitle').textContent = 'Add Toll Booth';
+        document.getElementById('boothModalDesc').textContent = 'Create a new toll booth configuration';
+        document.getElementById('boothSubmitBtn').textContent = 'Add Booth';
+        boothForm.reset();
+        boothForm.dataset.editId = '';
+        modal.classList.add('active');
+    });
+
+    document.getElementById('closeBoothModal').addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+
+    boothForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var newBooth = {
+            id: nextId++,
+            name: document.getElementById('boothName').value,
+            location: document.getElementById('boothLocation').value,
+            lanes: parseInt(document.getElementById('boothLanes').value),
+            operator: document.getElementById('boothOperator').value,
+            rate: parseFloat(document.getElementById('boothRate').value)
+        };
+        tollBooths.push(newBooth);
+        renderBooths();
+        modal.classList.remove('active');
+        showToast('Toll booth added successfully');
+    });
 
     renderBooths();
 });
