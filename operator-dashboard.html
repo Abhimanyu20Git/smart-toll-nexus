@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Dashboard - SmartToll Connect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="dash-header">
+        <div class="container dash-header-inner">
+            <div class="dash-brand">
+                <span class="dash-logo logo-operator">O</span>
+                <div>
+                    <h1>SmartToll Connect</h1>
+                    <p>Operator Dashboard</p>
+                </div>
+            </div>
+            <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+        </div>
+    </header>
+
+    <main class="dash-main">
+        <div class="container">
+            <!-- Assignment Card -->
+            <div class="assignment-card">
+                <h3>Current Assignment</h3>
+                <div class="assignment-grid">
+                    <div>
+                        <span class="assign-label">Booth</span>
+                        <span class="assign-value">Plaza A</span>
+                    </div>
+                    <div>
+                        <span class="assign-label">Location</span>
+                        <span class="assign-value">Highway 101 North</span>
+                    </div>
+                    <div>
+                        <span class="assign-label">Lane</span>
+                        <span class="assign-value">Lane 3</span>
+                    </div>
+                    <div>
+                        <span class="assign-label">Shift</span>
+                        <span class="assign-value">Morning (6 AM - 2 PM)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid stats-3">
+                <div class="card stat-card">
+                    <div class="stat-label">Vehicles Processed</div>
+                    <div class="stat-row">
+                        <div class="stat-value">142</div>
+                        <div class="stat-icon icon-primary">V</div>
+                    </div>
+                    <div class="stat-change">Today's count</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">Revenue Collected</div>
+                    <div class="stat-row">
+                        <div class="stat-value">$2,184</div>
+                        <div class="stat-icon icon-success">$</div>
+                    </div>
+                    <div class="stat-change">This shift</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">Avg Processing Time</div>
+                    <div class="stat-row">
+                        <div class="stat-value">12s</div>
+                        <div class="stat-icon icon-secondary-bg">T</div>
+                    </div>
+                    <div class="stat-change positive">Excellent performance</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="operator-dashboard.js"></script>
+</body>
+</html>
