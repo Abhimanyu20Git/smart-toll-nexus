@@ -922,3 +922,85 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Vehicle Monitoring */
+.vehicle-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vehicle-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--bg);
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.vehicle-item:hover {
+    background: #edf0f4;
+}
+
+.v-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.v-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.v-status-paid {
+    background: rgba(39, 174, 96, 0.15);
+    color: var(--success);
+}
+
+.v-status-processing {
+    background: rgba(230, 126, 34, 0.15);
+    color: var(--accent);
+}
+
+.v-status-failed {
+    background: rgba(231, 76, 60, 0.15);
+    color: var(--danger);
+}
+
+.v-number {
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.v-meta {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+.v-right {
+    text-align: right;
+}
+
+.v-amount {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.v-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
