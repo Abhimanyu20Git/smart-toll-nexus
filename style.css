@@ -1031,3 +1031,8 @@ body {
     opacity: 0.88;
     margin-bottom: 28px;
 }
+
+.v-status-detected {
+    background: rgba(36, 113, 163, 0.15);
+    color: var(--primary-light);
+}
