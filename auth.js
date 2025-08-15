@@ -1,4 +1,4 @@
-﻿// Auth page logic
+// Auth page logic
 document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const role = params.get('role') || 'user';
@@ -100,7 +100,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if mode param says register
     var mode = params.get('mode');
     if (mode === 'register') {
-        tabs[1].click();
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        tabs[1].classList.add('active');
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'flex';
     }
 });
 
