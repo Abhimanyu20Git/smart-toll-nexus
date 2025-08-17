@@ -1097,3 +1097,33 @@ body.dark .toast {
     background: #f3f4f6;
     color: #111827;
 }
+
+body.dark .modal {
+    background: var(--card-bg);
+}
+
+body.dark .btn-outline-dark {
+    border-color: var(--border);
+    color: var(--text);
+}
+
+body.dark .btn-outline-dark:hover {
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+
+body.dark .preset-amounts .btn-outline-dark {
+    background: #111827;
+}
+
+body.dark .stat-card {
+    background: var(--card-bg);
+}
+
+body.dark .card {
+    background: var(--card-bg);
+}
+
+body.dark .auth-card {
+    background: var(--card-bg);
+}
