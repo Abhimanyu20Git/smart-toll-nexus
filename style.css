@@ -1036,3 +1036,64 @@ body {
     background: rgba(36, 113, 163, 0.15);
     color: var(--primary-light);
 }
+
+/* Dark Mode */
+.dark-toggle {
+    font-size: 1.2rem;
+    padding: 8px 12px;
+}
+
+body.dark {
+    --bg: #111827;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    --card-bg: #1f2937;
+    --border: #374151;
+}
+
+body.dark .hero {
+    background: linear-gradient(135deg, #0f3460, #16537e, #0d6b5e);
+}
+
+body.dark .feature-card {
+    background: var(--card-bg);
+}
+
+body.dark .footer {
+    background: #0d1117;
+}
+
+body.dark .transaction-item,
+body.dark .booth-item,
+body.dark .vehicle-item {
+    background: #111827;
+}
+
+body.dark .transaction-item:hover,
+body.dark .booth-item:hover,
+body.dark .vehicle-item:hover {
+    background: #1a2332;
+}
+
+body.dark .auth-tabs {
+    background: #111827;
+}
+
+body.dark .auth-tab.active {
+    background: var(--card-bg);
+}
+
+body.dark .otp-info {
+    background: #111827;
+}
+
+body.dark .form-group input {
+    background: #111827;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+body.dark .toast {
+    background: #f3f4f6;
+    color: #111827;
+}
