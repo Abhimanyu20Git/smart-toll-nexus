@@ -1127,3 +1127,27 @@ body.dark .card {
 body.dark .auth-card {
     background: var(--card-bg);
 }
+
+.landing-dark-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+body.dark .landing-dark-toggle {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .cta-section {
+    background: linear-gradient(135deg, #0f3460, #0d6b5e);
+}
