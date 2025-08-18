@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Pay now
     document.getElementById('payNowBtn').addEventListener('click', function() {
-        var amount = parseFloat(rechargeInput.value);
+        var amount = parseFloat(parseFloat(rechargeInput.value).toFixed(2));
         if (isNaN(amount) || amount <= 0) {
             showToast('Please enter a valid amount');
             return;
