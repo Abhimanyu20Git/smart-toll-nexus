@@ -1,4 +1,4 @@
-// User Dashboard
+﻿// User Dashboard
 document.addEventListener('DOMContentLoaded', function() {
     var role = localStorage.getItem('userRole');
     if (role !== 'user') {
@@ -6,14 +6,20 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    var walletBalance = 250.50;
-
-    var transactions = [
+    var defaultTransactions = [
         { id: 1, date: '2025-08-07', time: '14:30', booth: 'Plaza A - Lane 3', amount: 15.50, type: 'toll' },
         { id: 2, date: '2025-08-06', time: '09:15', booth: 'Wallet Recharge', amount: 100.00, type: 'recharge' },
         { id: 3, date: '2025-08-05', time: '18:45', booth: 'Plaza B - Lane 1', amount: 20.00, type: 'toll' },
         { id: 4, date: '2025-08-04', time: '11:20', booth: 'Plaza C - Lane 2', amount: 12.50, type: 'toll' }
     ];
+
+    var walletBalance = parseFloat(localStorage.getItem('walletBalance')) || 250.50;
+    var transactions = JSON.parse(localStorage.getItem('transactions')) || defaultTransactions;
+
+    function saveData() {
+        localStorage.setItem('walletBalance', walletBalance.toString());
+        localStorage.setItem('transactions', JSON.stringify(transactions));
+    }
 
     document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem('userRole');
@@ -68,14 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === modal) modal.classList.remove('active');
     });
 
-    // Preset amount buttons
     document.querySelectorAll('.preset-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             rechargeInput.value = btn.dataset.amount;
         });
     });
 
-    // Pay now
     document.getElementById('payNowBtn').addEventListener('click', function() {
         var amount = parseFloat(parseFloat(rechargeInput.value).toFixed(2));
         if (isNaN(amount) || amount <= 0) {
@@ -99,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'recharge'
         });
 
+        saveData();
         renderTransactions();
         modal.classList.remove('active');
         showToast('Wallet recharged with $' + amount.toFixed(2));
