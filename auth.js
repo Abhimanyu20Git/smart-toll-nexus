@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
         roleIcon.textContent = 'A';
         roleIcon.style.background = 'var(--primary)';
         roleTitle.textContent = 'Administrator Portal';
+    document.title = roleTitle.textContent + ' - SmartToll Connect';
     } else if (role === 'operator') {
         roleIcon.textContent = 'O';
         roleIcon.style.background = 'var(--secondary)';
         roleTitle.textContent = 'Toll Booth Operator';
+    document.title = roleTitle.textContent + ' - SmartToll Connect';
     } else {
         roleIcon.textContent = 'U';
         roleIcon.style.background = 'var(--accent)';
         roleTitle.textContent = 'User Portal';
+    document.title = roleTitle.textContent + ' - SmartToll Connect';
     }
 
     // Tab switching
