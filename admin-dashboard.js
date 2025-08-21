@@ -6,12 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    var nextId = 4;
-    var tollBooths = [
+    var defaultBooths = [
         { id: 1, name: 'Plaza A', location: 'Highway 101 North', lanes: 4, operator: 'John Smith', rate: 15.50 },
         { id: 2, name: 'Plaza B', location: 'Highway 101 South', lanes: 6, operator: 'Jane Doe', rate: 20.00 },
         { id: 3, name: 'Plaza C', location: 'Interstate 5', lanes: 5, operator: 'Mike Johnson', rate: 12.50 }
     ];
+
+    var tollBooths = JSON.parse(localStorage.getItem('tollBooths')) || defaultBooths;
+    var nextId = tollBooths.length > 0 ? Math.max.apply(null, tollBooths.map(function(b) { return b.id; })) + 1 : 1;
+
+    function saveBooths() {
+        localStorage.setItem('tollBooths', JSON.stringify(tollBooths));
+    }
 
     var modal = document.getElementById('boothModal');
     var boothForm = document.getElementById('boothForm');
@@ -52,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var id = parseInt(btn.dataset.id);
                 tollBooths = tollBooths.filter(function(b) { return b.id !== id; });
                 renderBooths();
+                saveBooths();
                 showToast('Toll booth removed');
             });
         });
@@ -115,11 +122,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return b;
             });
+            saveBooths();
             showToast('Toll booth updated successfully');
         } else {
             // Adding
             boothData.id = nextId++;
             tollBooths.push(boothData);
+            saveBooths();
             showToast('Toll booth added successfully');
         }
 
