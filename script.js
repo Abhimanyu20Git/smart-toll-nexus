@@ -1,4 +1,4 @@
-﻿// SmartToll Connect - Shared utilities
+// SmartToll Connect - Shared utilities
 
 function showToast(message) {
     var existing = document.querySelector('.toast');
@@ -38,3 +38,22 @@ function initDarkMode() {
 }
 
 document.addEventListener('DOMContentLoaded', initDarkMode);
+
+
+// Scroll detection for landing nav
+function initNavScroll() {
+    var nav = document.querySelector('.landing-nav');
+    if (!nav) return;
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initNavScroll();
+});
