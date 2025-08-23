@@ -1206,3 +1206,14 @@ body.dark .landing-nav.scrolled {
 .nav-link:hover {
     color: #fff;
 }
+
+@media (max-width: 500px) {
+    .nav-links {
+        display: none;
+    }
+
+    .landing-dark-toggle {
+        top: 12px;
+        right: 12px;
+    }
+}
