@@ -57,10 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var email = document.getElementById('loginEmail').value;
         localStorage.setItem('userRole', role);
         localStorage.setItem('userEmail', email);
+        var submitBtn = loginForm.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Signing in...';
+        submitBtn.disabled = true;
         showToast('Login successful!');
         setTimeout(function() {
             window.location.href = role + '-dashboard.html';
-        }, 800);
+        }, 1000);
     });
 
     // OTP flow
@@ -74,7 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
         otpSection.style.display = 'flex';
         otpSection.style.flexDirection = 'column';
         otpSection.style.gap = '16px';
+        sendOtpBtn.textContent = 'Sending...';
+        sendOtpBtn.disabled = true;
         showToast('OTP sent to your email and phone!');
+        setTimeout(function() {
+            sendOtpBtn.textContent = 'Send OTP';
+            sendOtpBtn.disabled = false;
+        }, 500);
     });
 
     changeDetailsBtn.addEventListener('click', function() {
