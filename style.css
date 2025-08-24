@@ -1217,3 +1217,14 @@ body.dark .landing-nav.scrolled {
         right: 12px;
     }
 }
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state p {
+    font-size: 1rem;
+}

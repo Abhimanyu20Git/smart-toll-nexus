@@ -1,4 +1,4 @@
-﻿// User Dashboard
+// User Dashboard
 document.addEventListener('DOMContentLoaded', function() {
     var role = localStorage.getItem('userRole');
     if (role !== 'user') {
@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderTransactions() {
         var list = document.getElementById('transactionList');
         list.innerHTML = '';
+
+        if (transactions.length === 0) {
+            list.innerHTML = '<div class="empty-state"><p>No transactions yet</p></div>';
+            return;
+        }
 
         transactions.forEach(function(tx) {
             var div = document.createElement('div');
