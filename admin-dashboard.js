@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.delete-booth').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 var id = parseInt(btn.dataset.id);
+                if (!confirm('Are you sure you want to delete this toll booth?')) return;
                 tollBooths = tollBooths.filter(function(b) { return b.id !== id; });
                 renderBooths();
                 saveBooths();
