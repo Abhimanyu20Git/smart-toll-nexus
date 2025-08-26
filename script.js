@@ -57,3 +57,13 @@ function initNavScroll() {
 document.addEventListener('DOMContentLoaded', function() {
     initNavScroll();
 });
+
+// Close modals on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        var modals = document.querySelectorAll('.modal-overlay.active');
+        modals.forEach(function(m) {
+            m.classList.remove('active');
+        });
+    }
+});
