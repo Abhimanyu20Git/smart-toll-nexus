@@ -148,7 +148,7 @@ body {
     border-radius: var(--radius);
     padding: 28px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .feature-card:hover {
