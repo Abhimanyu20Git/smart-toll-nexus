@@ -1229,3 +1229,12 @@ body.dark .landing-nav.scrolled {
 .empty-state p {
     font-size: 1rem;
 }
+
+/* Form Validation */
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: var(--danger);
+}
+
+.form-group input:valid:not(:placeholder-shown) {
+    border-color: var(--success);
+}
