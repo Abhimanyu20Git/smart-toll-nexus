@@ -20,50 +20,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function getStatusIcon(status) {
-        if (status === 'paid') return 'âœ“';
-        if (status === 'failed') return 'âœ—';
-        if (status === 'detected') return 'â—‰';
-        return '...';
+        if (status === 'paid') return '&#10003;';
+        if (status === 'failed') return '&#10007;';
+        if (status === 'detected') return '&#9673;';
+        return '&#8943;';
+    }
+
+    function getStatusLabel(status) {
+        return status.charAt(0).toUpperCase() + status.slice(1);
     }
 
     function renderVehicles() {
         var list = document.getElementById('vehicleList');
-        list.innerHTML = '';
+        var html = '';
 
         vehicles.forEach(function(v) {
-            var div = document.createElement('div');
-            div.className = 'vehicle-item';
-
             var statusClass = 'v-status-' + v.status;
 
-            div.innerHTML =
-                '<div class="v-left">' +
-                    '<div class="v-icon ' + statusClass + '">' + getStatusIcon(v.status) + '</div>' +
-                    '<div>' +
-                        '<div class="v-number">' + v.number + '</div>' +
-                        '<div class="v-meta">Lane ' + v.lane + ' - ' + v.time + '</div>' +
+            html +=
+                '<div class="vehicle-item">' +
+                    '<div class="v-left">' +
+                        '<div class="v-icon ' + statusClass + '">' + getStatusIcon(v.status) + '</div>' +
+                        '<div>' +
+                            '<div class="v-number">' + v.number + '</div>' +
+                            '<div class="v-meta">Lane ' + v.lane + ' - ' + v.time + '</div>' +
+                        '</div>' +
                     '</div>' +
-                '</div>' +
-                '<div class="v-right">' +
-                    '<div class="v-amount">$' + v.amount.toFixed(2) + '</div>' +
-                    '<span class="v-badge ' + statusClass + '">' + v.status.charAt(0).toUpperCase() + v.status.slice(1) + '</span>' +
+                    '<div class="v-right">' +
+                        '<div class="v-amount">$' + v.amount.toFixed(2) + '</div>' +
+                        '<span class="v-badge ' + statusClass + '">' + getStatusLabel(v.status) + '</span>' +
+                    '</div>' +
                 '</div>';
-
-            list.appendChild(div);
         });
+
+        list.innerHTML = html;
     }
 
-    // Simulate status changes
-    setInterval(function() {
+    // Simulate status progression
+    var simInterval = setInterval(function() {
+        var changed = false;
         vehicles = vehicles.map(function(v) {
             if (v.status === 'detected') {
                 v.status = 'processing';
+                changed = true;
             } else if (v.status === 'processing') {
                 v.status = Math.random() > 0.15 ? 'paid' : 'failed';
+                changed = true;
             }
             return v;
         });
-        renderVehicles();
+        if (changed) renderVehicles();
     }, 3000);
 
     renderVehicles();
