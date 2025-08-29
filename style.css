@@ -1238,3 +1238,16 @@ body.dark .landing-nav.scrolled {
 .form-group input:valid:not(:placeholder-shown) {
     border-color: var(--success);
 }
+
+/* Focus Styles */
+.btn:focus-visible,
+.form-group input:focus-visible,
+.auth-tab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+body.dark .btn:focus-visible,
+body.dark .form-group input:focus-visible {
+    outline-color: #60a5fa;
+}
