@@ -5,7 +5,7 @@
         document.body.classList.add('dark');
     }
 })();
-// SmartToll Connect - Shared utilities
+// SmartToll Connect - Shared JS
 
 function showToast(message) {
     var existing = document.querySelector('.toast');
@@ -36,11 +36,11 @@ function initDarkMode() {
             document.body.classList.toggle('dark');
             var isDark = document.body.classList.contains('dark');
             localStorage.setItem('darkMode', isDark);
-            toggle.textContent = isDark ? 'â˜€' : 'â˜¾';
+            toggle.textContent = isDark ? '\u2600' : '\u263E';
         });
 
         // Set initial icon
-        toggle.textContent = document.body.classList.contains('dark') ? 'â˜€' : 'â˜¾';
+        toggle.textContent = document.body.classList.contains('dark') ? '\u2600' : '\u263E';
     }
 }
 

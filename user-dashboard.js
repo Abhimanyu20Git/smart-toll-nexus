@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function updateWalletDisplay() {
-        document.getElementById('walletAmount').textContent = '$' + walletBalance.toFixed(2);
+        document.getElementById('walletAmount').textContent = '\u20B9' + walletBalance.toFixed(2);
     }
 
     function renderTransactions() {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         '<div class="tx-date">' + tx.date + ' at ' + tx.time + '</div>' +
                     '</div>' +
                 '</div>' +
-                '<div class="tx-amount ' + amountClass + '">' + sign + '$' + tx.amount.toFixed(2) + '</div>';
+                '<div class="tx-amount ' + amountClass + '">' + sign + '\u20B9' + tx.amount.toFixed(2) + '</div>';
 
             list.appendChild(div);
         });
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         saveData();
         renderTransactions();
         modal.classList.remove('active');
-        showToast('Wallet recharged with $' + amount.toFixed(2));
+        showToast('Wallet recharged with \u20B9' + amount.toFixed(2));
     });
 
     updateWalletDisplay();

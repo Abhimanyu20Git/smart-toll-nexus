@@ -1,4 +1,4 @@
-﻿// Operator Dashboard
+// Operator Dashboard
 document.addEventListener('DOMContentLoaded', function() {
     var role = localStorage.getItem('userRole');
     if (role !== 'operator') {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         '</div>' +
                     '</div>' +
                     '<div class="v-right">' +
-                        '<div class="v-amount">$' + v.amount.toFixed(2) + '</div>' +
+                        '<div class="v-amount">\u20B9' + v.amount.toFixed(2) + '</div>' +
                         '<span class="v-badge ' + statusClass + '">' + getStatusLabel(v.status) + '</span>' +
                     '</div>' +
                 '</div>';

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     '<div class="booth-meta">' +
                         '<span><strong>' + booth.lanes + '</strong> lanes</span>' +
                         '<span>Operator: <strong>' + booth.operator + '</strong></span>' +
-                        '<span>Rate: <strong class="text-success">$' + booth.rate.toFixed(2) + '</strong></span>' +
+                        '<span>Rate: <strong class="text-success">\u20B9' + booth.rate.toFixed(2) + '</strong></span>' +
                     '</div>' +
                 '</div>' +
                 '<div class="booth-actions">' +
