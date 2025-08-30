@@ -1,3 +1,10 @@
+
+// Prevent dark mode flash
+(function() {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+    }
+})();
 // SmartToll Connect - Shared utilities
 
 function showToast(message) {
