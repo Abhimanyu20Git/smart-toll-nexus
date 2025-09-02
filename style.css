@@ -1251,3 +1251,11 @@ body.dark .btn:focus-visible,
 body.dark .form-group input:focus-visible {
     outline-color: #60a5fa;
 }
+
+/* Booth Map */
+#boothMap {
+    height: 350px;
+    border-radius: var(--radius);
+    margin-top: 12px;
+    z-index: 1;
+}

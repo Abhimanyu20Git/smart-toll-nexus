@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     var defaultBooths = [
-        { id: 1, name: 'Plaza A', location: 'Highway 101 North', lanes: 4, operator: 'John Smith', rate: 15.50 },
-        { id: 2, name: 'Plaza B', location: 'Highway 101 South', lanes: 6, operator: 'Jane Doe', rate: 20.00 },
-        { id: 3, name: 'Plaza C', location: 'Interstate 5', lanes: 5, operator: 'Mike Johnson', rate: 12.50 }
+        { id: 1, name: 'Plaza A', location: 'NH48 Mumbai-Pune Expressway', lanes: 4, operator: 'John Smith', rate: 15.50, lat: 19.0760, lng: 72.8777 },
+        { id: 2, name: 'Plaza B', location: 'NH44 Bangalore Highway', lanes: 6, operator: 'Jane Doe', rate: 20.00, lat: 18.5204, lng: 73.8567 },
+        { id: 3, name: 'Plaza C', location: 'NH60 Nashik Bypass', lanes: 5, operator: 'Mike Johnson', rate: 12.50, lat: 19.9975, lng: 73.7898 }
     ];
 
     var tollBooths = JSON.parse(localStorage.getItem('tollBooths')) || defaultBooths;
@@ -138,4 +138,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     renderBooths();
+
+    // Leaflet Map
+    var map = L.map('boothMap').setView([19.0760, 73.5], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var markers = [];
+
+    function renderMapMarkers() {
+        markers.forEach(function(m) { map.removeLayer(m); });
+        markers = [];
+        tollBooths.forEach(function(booth) {
+            if (booth.lat && booth.lng) {
+                var marker = L.marker([booth.lat, booth.lng]).addTo(map);
+                marker.bindPopup(
+                    '<strong>' + booth.name + '</strong><br>' +
+                    booth.location + '<br>' +
+                    'Operator: ' + booth.operator + '<br>' +
+                    'Rate: \u20B9' + booth.rate.toFixed(2)
+                );
+                markers.push(marker);
+            }
+        });
+    }
+
+    renderMapMarkers();
 });
