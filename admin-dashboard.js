@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!confirm('Are you sure you want to delete this toll booth?')) return;
                 tollBooths = tollBooths.filter(function(b) { return b.id !== id; });
                 renderBooths();
+                renderMapMarkers();
                 saveBooths();
                 showToast('Toll booth removed');
             });
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         renderBooths();
+        renderMapMarkers();
         modal.classList.remove('active');
     });
 
@@ -157,11 +159,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     '<strong>' + booth.name + '</strong><br>' +
                     booth.location + '<br>' +
                     'Operator: ' + booth.operator + '<br>' +
-                    'Rate: \u20B9' + booth.rate.toFixed(2)
+                    'Rate: \u20B9' + booth.rate.toFixed(2) + '<br>' +
+                    '<em>' + booth.lanes + ' lanes</em>'
                 );
                 markers.push(marker);
             }
         });
+        if (markers.length > 0) {
+            var group = L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.3));
+        }
     }
 
     renderMapMarkers();
