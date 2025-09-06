@@ -1259,3 +1259,9 @@ body.dark .form-group input:focus-visible {
     margin-top: 12px;
     z-index: 1;
 }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}

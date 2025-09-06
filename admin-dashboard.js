@@ -79,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('boothLanes').value = booth.lanes;
                 document.getElementById('boothOperator').value = booth.operator;
                 document.getElementById('boothRate').value = booth.rate;
+                document.getElementById('boothLat').value = booth.lat || '';
+                document.getElementById('boothLng').value = booth.lng || '';
                 boothForm.dataset.editId = booth.id;
                 modal.classList.add('active');
             });
@@ -111,7 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
             location: document.getElementById('boothLocation').value,
             lanes: parseInt(document.getElementById('boothLanes').value),
             operator: document.getElementById('boothOperator').value,
-            rate: parseFloat(document.getElementById('boothRate').value)
+            rate: parseFloat(document.getElementById('boothRate').value),
+            lat: parseFloat(document.getElementById('boothLat').value) || null,
+            lng: parseFloat(document.getElementById('boothLng').value) || null
         };
 
         var editId = boothForm.dataset.editId;
