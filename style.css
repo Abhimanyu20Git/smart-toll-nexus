@@ -1265,3 +1265,17 @@ body.dark .form-group input:focus-visible {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
+
+/* Charts */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.chart-container {
+    position: relative;
+    height: 280px;
+    padding: 12px;
+}

@@ -176,4 +176,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     renderMapMarkers();
+
+    // Revenue Chart
+    var revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            datasets: [{
+                label: 'Revenue (\u20B9)',
+                data: [28500, 32100, 35600, 38200, 42800, 45231],
+                borderColor: '#1a5276',
+                backgroundColor: 'rgba(26, 82, 118, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 4,
+                pointBackgroundColor: '#1a5276'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: { callback: function(v) { return '\u20B9' + v.toLocaleString(); } }
+                }
+            }
+        }
+    });
+
+    // Vehicle Count Chart
+    var vehicleCtx = document.getElementById('vehicleChart').getContext('2d');
+    new Chart(vehicleCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Vehicles',
+                data: [420, 385, 450, 410, 520, 680, 590],
+                backgroundColor: '#17a589',
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+        }
+    });
 });
