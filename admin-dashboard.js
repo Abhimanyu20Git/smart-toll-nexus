@@ -178,20 +178,24 @@ document.addEventListener('DOMContentLoaded', function() {
     renderMapMarkers();
 
     // Revenue Chart
+    var isDark = document.body.classList.contains('dark');
+    var chartTextColor = isDark ? '#e2e8f0' : '#1c2833';
+    var chartGridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
+
     var revenueCtx = document.getElementById('revenueChart').getContext('2d');
-    new Chart(revenueCtx, {
+    var revenueChart = new Chart(revenueCtx, {
         type: 'line',
         data: {
             labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
             datasets: [{
                 label: 'Revenue (\u20B9)',
                 data: [28500, 32100, 35600, 38200, 42800, 45231],
-                borderColor: '#1a5276',
-                backgroundColor: 'rgba(26, 82, 118, 0.1)',
+                borderColor: isDark ? '#60a5fa' : '#1a5276',
+                backgroundColor: isDark ? 'rgba(96,165,250,0.1)' : 'rgba(26,82,118,0.1)',
                 fill: true,
                 tension: 0.3,
                 pointRadius: 4,
-                pointBackgroundColor: '#1a5276'
+                pointBackgroundColor: isDark ? '#60a5fa' : '#1a5276'
             }]
         },
         options: {
@@ -201,22 +205,27 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: {
                     beginAtZero: false,
-                    ticks: { callback: function(v) { return '\u20B9' + v.toLocaleString(); } }
-                }
+                    ticks: {
+                        color: chartTextColor,
+                        callback: function(v) { return '\u20B9' + v.toLocaleString(); }
+                    },
+                    grid: { color: chartGridColor }
+                },
+                x: { ticks: { color: chartTextColor }, grid: { color: chartGridColor } }
             }
         }
     });
 
     // Vehicle Count Chart
     var vehicleCtx = document.getElementById('vehicleChart').getContext('2d');
-    new Chart(vehicleCtx, {
+    var vehicleChart = new Chart(vehicleCtx, {
         type: 'bar',
         data: {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             datasets: [{
                 label: 'Vehicles',
                 data: [420, 385, 450, 410, 520, 680, 590],
-                backgroundColor: '#17a589',
+                backgroundColor: isDark ? '#34d399' : '#17a589',
                 borderRadius: 6
             }]
         },
@@ -224,7 +233,38 @@ document.addEventListener('DOMContentLoaded', function() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+            scales: {
+                y: { beginAtZero: true, ticks: { color: chartTextColor }, grid: { color: chartGridColor } },
+                x: { ticks: { color: chartTextColor }, grid: { color: chartGridColor } }
+            }
         }
     });
+
+    // Update charts on dark mode toggle
+    var dmToggle = document.getElementById('darkModeToggle');
+    if (dmToggle) {
+        dmToggle.addEventListener('click', function() {
+            setTimeout(function() {
+                var dark = document.body.classList.contains('dark');
+                var tc = dark ? '#e2e8f0' : '#1c2833';
+                var gc = dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
+
+                revenueChart.data.datasets[0].borderColor = dark ? '#60a5fa' : '#1a5276';
+                revenueChart.data.datasets[0].backgroundColor = dark ? 'rgba(96,165,250,0.1)' : 'rgba(26,82,118,0.1)';
+                revenueChart.data.datasets[0].pointBackgroundColor = dark ? '#60a5fa' : '#1a5276';
+                revenueChart.options.scales.y.ticks.color = tc;
+                revenueChart.options.scales.x.ticks.color = tc;
+                revenueChart.options.scales.y.grid.color = gc;
+                revenueChart.options.scales.x.grid.color = gc;
+                revenueChart.update();
+
+                vehicleChart.data.datasets[0].backgroundColor = dark ? '#34d399' : '#17a589';
+                vehicleChart.options.scales.y.ticks.color = tc;
+                vehicleChart.options.scales.x.ticks.color = tc;
+                vehicleChart.options.scales.y.grid.color = gc;
+                vehicleChart.options.scales.x.grid.color = gc;
+                vehicleChart.update();
+            }, 50);
+        });
+    }
 });
