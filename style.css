@@ -1279,3 +1279,39 @@ body.dark .form-group input:focus-visible {
     height: 280px;
     padding: 12px;
 }
+
+/* QR Toll Pass */
+.qr-pass-card {
+    margin-bottom: 24px;
+}
+
+.qr-content {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 20px;
+}
+
+.qr-code img {
+    width: 160px;
+    height: 160px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+}
+
+.qr-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qr-vehicle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.qr-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}

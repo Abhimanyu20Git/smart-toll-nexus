@@ -116,4 +116,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateWalletDisplay();
     renderTransactions();
+
+    // QR Toll Pass
+    var vehicleNum = 'MH-01-AB-1234';
+    var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent('SMARTTOLL:' + vehicleNum + ':RFID_ACTIVE');
+    var qrImg = document.createElement('img');
+    qrImg.src = qrUrl;
+    qrImg.alt = 'Toll Pass QR Code';
+    document.getElementById('qrCode').appendChild(qrImg);
+    document.getElementById('qrVehicle').textContent = vehicleNum;
+
+    document.getElementById('downloadQrBtn').addEventListener('click', function() {
+        var link = document.createElement('a');
+        link.href = qrUrl;
+        link.download = 'smarttoll-pass-' + vehicleNum + '.png';
+        link.click();
+        showToast('Downloading toll pass');
+    });
 });
