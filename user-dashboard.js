@@ -133,4 +133,21 @@ document.addEventListener('DOMContentLoaded', function() {
         link.click();
         showToast('Downloading toll pass');
     });
+
+    // Share QR pass via Web Share API
+    var shareBtn = document.getElementById('shareQrBtn');
+    if (shareBtn) {
+        if (navigator.share) {
+            shareBtn.style.display = 'inline-flex';
+            shareBtn.addEventListener('click', function() {
+                navigator.share({
+                    title: 'SmartToll Pass - ' + vehicleNum,
+                    text: 'My SmartToll digital toll pass for vehicle ' + vehicleNum,
+                    url: qrUrl
+                }).catch(function() {});
+            });
+        } else {
+            shareBtn.style.display = 'none';
+        }
+    }
 });
