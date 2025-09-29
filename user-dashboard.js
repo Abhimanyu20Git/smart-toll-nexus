@@ -150,4 +150,63 @@ document.addEventListener('DOMContentLoaded', function() {
             shareBtn.style.display = 'none';
         }
     }
+
+    // Nearest Booth - Geolocation
+    var boothLocations = JSON.parse(localStorage.getItem('tollBooths')) || [
+        { name: 'Plaza A', location: 'NH48 Mumbai-Pune Expressway', rate: 15.50, lat: 19.0760, lng: 72.8777 },
+        { name: 'Plaza B', location: 'NH44 Bangalore Highway', rate: 20.00, lat: 18.5204, lng: 73.8567 },
+        { name: 'Plaza C', location: 'NH60 Nashik Bypass', rate: 12.50, lat: 19.9975, lng: 73.7898 }
+    ];
+
+    function haversineDistance(lat1, lng1, lat2, lng2) {
+        var R = 6371;
+        var dLat = (lat2 - lat1) * Math.PI / 180;
+        var dLng = (lng2 - lng1) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    document.getElementById('findNearestBtn').addEventListener('click', function() {
+        var content = document.getElementById('nearestBoothContent');
+        content.innerHTML = '<p class="text-muted">Locating you...</p>';
+
+        if (!navigator.geolocation) {
+            content.innerHTML = '<p class="text-muted">Geolocation is not supported by your browser</p>';
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            var userLat = pos.coords.latitude;
+            var userLng = pos.coords.longitude;
+            var nearest = null;
+            var minDist = Infinity;
+
+            boothLocations.forEach(function(booth) {
+                if (!booth.lat || !booth.lng) return;
+                var dist = haversineDistance(userLat, userLng, booth.lat, booth.lng);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = booth;
+                }
+            });
+
+            if (nearest) {
+                var eta = Math.round(minDist / 60 * 60);
+                content.innerHTML =
+                    '<div class="nearest-result">' +
+                        '<div class="nearest-name">' + nearest.name + '</div>' +
+                        '<div class="nearest-location">' + nearest.location + '</div>' +
+                        '<div class="nearest-stats">' +
+                            '<span><strong>' + minDist.toFixed(1) + '</strong> km away</span>' +
+                            '<span><strong>~' + eta + '</strong> min drive</span>' +
+                            '<span>Rate: <strong>\u20B9' + nearest.rate.toFixed(2) + '</strong></span>' +
+                        '</div>' +
+                    '</div>';
+            }
+        }, function() {
+            content.innerHTML = '<p class="text-muted">Unable to get your location. Please allow location access.</p>';
+        });
+    });
 });

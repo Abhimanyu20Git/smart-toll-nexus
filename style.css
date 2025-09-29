@@ -1315,3 +1315,33 @@ body.dark .form-group input:focus-visible {
     color: var(--text-muted);
     font-size: 0.9rem;
 }
+
+/* Nearest Booth */
+.nearest-booth-card {
+    margin-bottom: 24px;
+}
+
+.nearest-booth-card .card-header + div {
+    padding: 20px;
+}
+
+.nearest-result {
+    padding: 4px 0;
+}
+
+.nearest-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.nearest-location {
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.nearest-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
