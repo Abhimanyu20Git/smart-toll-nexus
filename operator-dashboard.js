@@ -73,4 +73,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
 
     renderVehicles();
+
+    // Weather Widget - Open-Meteo API (no key needed)
+    var boothLat = 19.0760;
+    var boothLng = 72.8777;
+    var weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + boothLat + '&longitude=' + boothLng + '&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Asia%2FKolkata';
+
+    function getWeatherLabel(code) {
+        if (code === 0) return 'Clear Sky';
+        if (code <= 3) return 'Partly Cloudy';
+        if (code <= 48) return 'Foggy';
+        if (code <= 57) return 'Drizzle';
+        if (code <= 65) return 'Rainy';
+        if (code <= 77) return 'Snow';
+        if (code <= 82) return 'Rain Showers';
+        if (code <= 86) return 'Snow Showers';
+        if (code >= 95) return 'Thunderstorm';
+        return 'Unknown';
+    }
+
+    function getWeatherEmoji(code) {
+        if (code === 0) return '\u2600';
+        if (code <= 3) return '\u26C5';
+        if (code <= 48) return '\uD83C\uDF2B';
+        if (code <= 65) return '\uD83C\uDF27';
+        if (code <= 77) return '\u2744';
+        if (code >= 95) return '\u26A1';
+        return '\uD83C\uDF24';
+    }
+
+    fetch(weatherUrl)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+            var c = data.current;
+            var el = document.getElementById('weatherContent');
+            el.innerHTML =
+                '<div class="weather-main">' +
+                    '<span class="weather-emoji">' + getWeatherEmoji(c.weather_code) + '</span>' +
+                    '<span class="weather-temp">' + c.temperature_2m + '\u00B0C</span>' +
+                '</div>' +
+                '<div class="weather-label">' + getWeatherLabel(c.weather_code) + '</div>' +
+                '<div class="weather-details">' +
+                    '<span>Humidity: <strong>' + c.relative_humidity_2m + '%</strong></span>' +
+                    '<span>Wind: <strong>' + c.wind_speed_10m + ' km/h</strong></span>' +
+                '</div>';
+        })
+        .catch(function() {
+            document.getElementById('weatherContent').innerHTML = '<p class="text-muted">Unable to load weather data</p>';
+        });
 });

@@ -1345,3 +1345,36 @@ body.dark .form-group input:focus-visible {
     gap: 24px;
     flex-wrap: wrap;
 }
+
+/* Weather Widget */
+.weather-content {
+    padding: 20px;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.weather-emoji {
+    font-size: 2.5rem;
+}
+
+.weather-temp {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.weather-label {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.weather-details {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
