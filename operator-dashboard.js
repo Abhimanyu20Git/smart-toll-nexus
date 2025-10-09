@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Weather Widget - Open-Meteo API (no key needed)
     var boothLat = 19.0760;
     var boothLng = 72.8777;
-    var weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + boothLat + '&longitude=' + boothLng + '&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Asia%2FKolkata';
+    var weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + boothLat + '&longitude=' + boothLng + '&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FKolkata&forecast_days=3';
 
     function getWeatherLabel(code) {
         if (code === 0) return 'Clear Sky';
@@ -102,23 +102,48 @@ document.addEventListener('DOMContentLoaded', function() {
         return '\uD83C\uDF24';
     }
 
-    fetch(weatherUrl)
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            var c = data.current;
-            var el = document.getElementById('weatherContent');
-            el.innerHTML =
-                '<div class="weather-main">' +
-                    '<span class="weather-emoji">' + getWeatherEmoji(c.weather_code) + '</span>' +
-                    '<span class="weather-temp">' + c.temperature_2m + '\u00B0C</span>' +
-                '</div>' +
-                '<div class="weather-label">' + getWeatherLabel(c.weather_code) + '</div>' +
-                '<div class="weather-details">' +
-                    '<span>Humidity: <strong>' + c.relative_humidity_2m + '%</strong></span>' +
-                    '<span>Wind: <strong>' + c.wind_speed_10m + ' km/h</strong></span>' +
-                '</div>';
-        })
-        .catch(function() {
-            document.getElementById('weatherContent').innerHTML = '<p class="text-muted">Unable to load weather data</p>';
-        });
+    function loadWeather() {
+        document.getElementById('weatherContent').innerHTML = '<p class="text-muted">Loading weather data...</p>';
+        fetch(weatherUrl)
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                var c = data.current;
+                var d = data.daily;
+                var el = document.getElementById('weatherContent');
+                var forecastHtml = '';
+                if (d && d.time) {
+                    forecastHtml = '<div class="weather-forecast">';
+                    for (var i = 1; i < d.time.length; i++) {
+                        var dayName = new Date(d.time[i]).toLocaleDateString('en-IN', { weekday: 'short' });
+                        forecastHtml += '<div class="forecast-day">' +
+                            '<span class="forecast-name">' + dayName + '</span>' +
+                            '<span class="forecast-icon">' + getWeatherEmoji(d.weather_code[i]) + '</span>' +
+                            '<span class="forecast-range">' + Math.round(d.temperature_2m_min[i]) + '-' + Math.round(d.temperature_2m_max[i]) + '\u00B0</span>' +
+                        '</div>';
+                    }
+                    forecastHtml += '</div>';
+                }
+                el.innerHTML =
+                    '<div class="weather-main">' +
+                        '<span class="weather-emoji">' + getWeatherEmoji(c.weather_code) + '</span>' +
+                        '<span class="weather-temp">' + c.temperature_2m + '\u00B0C</span>' +
+                    '</div>' +
+                    '<div class="weather-label">' + getWeatherLabel(c.weather_code) + ' &middot; Feels like ' + c.apparent_temperature + '\u00B0C</div>' +
+                    '<div class="weather-details">' +
+                        '<span>Humidity: <strong>' + c.relative_humidity_2m + '%</strong></span>' +
+                        '<span>Wind: <strong>' + c.wind_speed_10m + ' km/h</strong></span>' +
+                    '</div>' +
+                    forecastHtml +
+                    '<button class="btn btn-ghost btn-sm" id="refreshWeather">Refresh</button>';
+                document.getElementById('refreshWeather').addEventListener('click', loadWeather);
+            })
+            .catch(function() {
+                document.getElementById('weatherContent').innerHTML =
+                    '<p class="text-muted">Unable to load weather data</p>' +
+                    '<button class="btn btn-ghost btn-sm" id="retryWeather">Retry</button>';
+                document.getElementById('retryWeather').addEventListener('click', loadWeather);
+            });
+    }
+
+    loadWeather();
 });
