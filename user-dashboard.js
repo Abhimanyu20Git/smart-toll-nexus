@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'index.html';
     });
 
+    requestNotificationPermission();
+
     function updateWalletDisplay() {
         document.getElementById('walletAmount').textContent = '\u20B9' + walletBalance.toFixed(2);
     }
@@ -112,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
         renderTransactions();
         modal.classList.remove('active');
         showToast('Wallet recharged with \u20B9' + amount.toFixed(2));
+        if (walletBalance < 50) {
+            sendNotification('Low Balance', 'Your wallet balance is \u20B9' + walletBalance.toFixed(2) + '. Please recharge.');
+        }
     });
 
     updateWalletDisplay();

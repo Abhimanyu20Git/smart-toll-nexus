@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'index.html';
     });
 
+    requestNotificationPermission();
+
     function getStatusIcon(status) {
         if (status === 'paid') return '&#10003;';
         if (status === 'failed') return '&#10007;';
@@ -64,8 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 v.status = 'processing';
                 changed = true;
             } else if (v.status === 'processing') {
-                v.status = Math.random() > 0.15 ? 'paid' : 'failed';
+                var paid = Math.random() > 0.15;
+                v.status = paid ? 'paid' : 'failed';
                 changed = true;
+                if (paid) {
+                    sendNotification('Toll Paid', v.number + ' - \u20B9' + v.amount.toFixed(2) + ' collected');
+                } else {
+                    sendNotification('Payment Failed', v.number + ' - toll payment failed');
+                }
             }
             return v;
         });
