@@ -122,6 +122,25 @@ document.addEventListener('DOMContentLoaded', function() {
     updateWalletDisplay();
     renderTransactions();
 
+    // Export CSV
+    document.getElementById('exportCsvBtn').addEventListener('click', function() {
+        if (transactions.length === 0) {
+            showToast('No transactions to export');
+            return;
+        }
+        var csv = 'Date,Time,Description,Type,Amount\n';
+        transactions.forEach(function(tx) {
+            csv += tx.date + ',' + tx.time + ',"' + tx.booth + '",' + tx.type + ',' + tx.amount.toFixed(2) + '\n';
+        });
+        var blob = new Blob([csv], { type: 'text/csv' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'smarttoll-transactions.csv';
+        link.click();
+        URL.revokeObjectURL(link.href);
+        showToast('Transactions exported');
+    });
+
     // QR Toll Pass
     var vehicleNum = 'MH-01-AB-1234';
     var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent('SMARTTOLL:' + vehicleNum + ':RFID_ACTIVE');
