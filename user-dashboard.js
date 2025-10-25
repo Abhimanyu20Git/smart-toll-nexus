@@ -58,9 +58,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         '<div class="tx-date">' + tx.date + ' at ' + tx.time + '</div>' +
                     '</div>' +
                 '</div>' +
-                '<div class="tx-amount ' + amountClass + '">' + sign + '\u20B9' + tx.amount.toFixed(2) + '</div>';
+                '<div class="tx-right">' +
+                    '<div class="tx-amount ' + amountClass + '">' + sign + '\u20B9' + tx.amount.toFixed(2) + '</div>' +
+                    (navigator.share ? '<button class="btn btn-ghost btn-sm share-tx" data-id="' + tx.id + '">Share</button>' : '') +
+                '</div>';
 
             list.appendChild(div);
+        });
+
+        // Share transaction
+        list.querySelectorAll('.share-tx').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var txId = parseInt(btn.dataset.id);
+                var tx = transactions.find(function(t) { return t.id === txId; });
+                if (!tx) return;
+                var sign = tx.type === 'recharge' ? '+' : '-';
+                navigator.share({
+                    title: 'SmartToll Receipt',
+                    text: tx.booth + '\n' + tx.date + ' at ' + tx.time + '\nAmount: ' + sign + '\u20B9' + tx.amount.toFixed(2)
+                }).catch(function() {});
+            });
         });
     }
 
