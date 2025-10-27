@@ -1287,6 +1287,12 @@ body.dark .form-group input:focus-visible {
     padding: 12px;
 }
 
+.chart-container-sm {
+    position: relative;
+    height: 240px;
+    padding: 12px;
+}
+
 /* QR Toll Pass */
 .qr-pass-card {
     margin-bottom: 24px;

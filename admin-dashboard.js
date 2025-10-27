@@ -267,4 +267,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 50);
         });
     }
+
+    // Revenue by Booth - Doughnut Chart
+    var boothRevenueCtx = document.getElementById('boothRevenueChart').getContext('2d');
+    var boothNames = tollBooths.map(function(b) { return b.name; });
+    var boothRevenues = tollBooths.map(function(b) { return Math.round(b.rate * (300 + Math.random() * 200)); });
+    var doughnutColors = ['#1a5276', '#17a589', '#e67e22', '#8e44ad', '#e74c3c'];
+
+    new Chart(boothRevenueCtx, {
+        type: 'doughnut',
+        data: {
+            labels: boothNames,
+            datasets: [{
+                data: boothRevenues,
+                backgroundColor: doughnutColors.slice(0, boothNames.length),
+                borderWidth: 2,
+                borderColor: isDark ? '#1e293b' : '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: chartTextColor, padding: 16, font: { size: 13 } }
+                }
+            }
+        }
+    });
 });
