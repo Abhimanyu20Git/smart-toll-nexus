@@ -541,6 +541,15 @@ body {
     .wallet-amount {
         font-size: 2.2rem;
     }
+
+    .qr-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .qr-info {
+        align-items: center;
+    }
 }
 
 /* Card Header */
@@ -882,6 +891,18 @@ body {
     .booth-header {
         flex-direction: column;
         gap: 12px;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #boothMap {
+        height: 250px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }
 
