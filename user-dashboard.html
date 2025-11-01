@@ -86,6 +86,14 @@
                     </div>
                     <button class="btn btn-outline-dark btn-sm" id="exportCsvBtn">Export CSV</button>
                 </div>
+                <div class="tx-filters">
+                    <input type="text" id="txSearch" placeholder="Search transactions..." class="tx-search-input">
+                    <select id="txFilter" class="tx-filter-select">
+                        <option value="all">All</option>
+                        <option value="toll">Toll Only</option>
+                        <option value="recharge">Recharges Only</option>
+                    </select>
+                </div>
                 <div class="transaction-list" id="transactionList"></div>
             </div>
         </div>

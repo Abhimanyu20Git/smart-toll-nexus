@@ -37,12 +37,21 @@ document.addEventListener('DOMContentLoaded', function() {
         var list = document.getElementById('transactionList');
         list.innerHTML = '';
 
-        if (transactions.length === 0) {
-            list.innerHTML = '<div class="empty-state"><p>No transactions yet</p></div>';
+        var filterType = document.getElementById('txFilter').value;
+        var searchText = document.getElementById('txSearch').value.toLowerCase();
+
+        var filtered = transactions.filter(function(tx) {
+            if (filterType !== 'all' && tx.type !== filterType) return false;
+            if (searchText && tx.booth.toLowerCase().indexOf(searchText) === -1 && tx.date.indexOf(searchText) === -1) return false;
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            list.innerHTML = '<div class="empty-state"><p>No transactions found</p></div>';
             return;
         }
 
-        transactions.forEach(function(tx) {
+        filtered.forEach(function(tx) {
             var div = document.createElement('div');
             div.className = 'transaction-item';
 
@@ -138,6 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateWalletDisplay();
     renderTransactions();
+
+    document.getElementById('txFilter').addEventListener('change', renderTransactions);
+    document.getElementById('txSearch').addEventListener('input', renderTransactions);
 
     // Export CSV
     document.getElementById('exportCsvBtn').addEventListener('click', function() {

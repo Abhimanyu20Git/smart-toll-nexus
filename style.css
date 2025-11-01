@@ -641,6 +641,39 @@ body {
     gap: 4px;
 }
 
+/* Transaction Filters */
+.tx-filters {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px 16px;
+}
+
+.tx-search-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.tx-filter-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--bg);
+    color: var(--text);
+}
+
+body.dark .tx-search-input,
+body.dark .tx-filter-select {
+    background: #334155;
+    border-color: #475569;
+    color: #e2e8f0;
+}
+
 /* Modal */
 .modal-overlay {
     position: fixed;
