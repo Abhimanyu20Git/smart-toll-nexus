@@ -1475,3 +1475,42 @@ body.dark .form-group input:focus-visible {
     font-size: 0.85rem;
     font-weight: 500;
 }
+
+/* Alert Banner */
+.alert-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.alert-warning {
+    background: #fef3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+body.dark .alert-warning {
+    background: rgba(255, 193, 7, 0.15);
+    color: #fbbf24;
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+body.dark .alert-danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.alert-icon {
+    font-size: 1.3rem;
+}

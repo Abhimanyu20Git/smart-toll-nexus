@@ -21,6 +21,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     requestNotificationPermission();
 
+    // Traffic Alert based on weather
+    function checkTrafficAlert(weatherCode) {
+        var alert = document.getElementById('trafficAlert');
+        var msg = document.getElementById('alertMessage');
+        if (weatherCode >= 61 && weatherCode <= 67) {
+            msg.textContent = 'Heavy rain expected. Expect slower traffic and reduced visibility.';
+            alert.style.display = 'flex';
+            alert.className = 'alert-banner alert-warning';
+        } else if (weatherCode >= 95) {
+            msg.textContent = 'Thunderstorm warning. Be cautious of vehicles stopping suddenly.';
+            alert.style.display = 'flex';
+            alert.className = 'alert-banner alert-danger';
+        } else if (weatherCode >= 45 && weatherCode <= 48) {
+            msg.textContent = 'Foggy conditions. Vehicles may be moving slower than usual.';
+            alert.style.display = 'flex';
+            alert.className = 'alert-banner alert-warning';
+        }
+    }
+
+    document.getElementById('dismissAlert').addEventListener('click', function() {
+        document.getElementById('trafficAlert').style.display = 'none';
+    });
+
     function getStatusIcon(status) {
         if (status === 'paid') return '&#10003;';
         if (status === 'failed') return '&#10007;';
@@ -144,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     forecastHtml +
                     '<button class="btn btn-ghost btn-sm" id="refreshWeather">Refresh</button>';
                 document.getElementById('refreshWeather').addEventListener('click', loadWeather);
+                checkTrafficAlert(c.weather_code);
             })
             .catch(function() {
                 document.getElementById('weatherContent').innerHTML =
