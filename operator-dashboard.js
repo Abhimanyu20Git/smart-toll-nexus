@@ -178,4 +178,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     loadWeather();
+
+    // Hourly Traffic Chart
+    var hours = ['6AM','7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM'];
+    var hourlyData = hours.map(function() { return Math.floor(10 + Math.random() * 30); });
+    var isDark = document.body.classList.contains('dark');
+    var trafficCtx = document.getElementById('trafficChart').getContext('2d');
+    new Chart(trafficCtx, {
+        type: 'line',
+        data: {
+            labels: hours,
+            datasets: [{
+                label: 'Vehicles',
+                data: hourlyData,
+                borderColor: isDark ? '#34d399' : '#17a589',
+                backgroundColor: isDark ? 'rgba(52,211,153,0.1)' : 'rgba(23,165,137,0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { color: isDark ? '#94a3b8' : '#5d6d7e' } },
+                x: { ticks: { color: isDark ? '#94a3b8' : '#5d6d7e' } }
+            }
+        }
+    });
 });
