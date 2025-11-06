@@ -106,8 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
     renderVehicles();
 
     // Weather Widget - Open-Meteo API (no key needed)
-    var boothLat = 19.0760;
-    var boothLng = 72.8777;
+    var storedBooths = JSON.parse(localStorage.getItem('tollBooths')) || [];
+    var assignedBooth = storedBooths.length > 0 ? storedBooths[0] : null;
+    var boothLat = assignedBooth && assignedBooth.lat ? assignedBooth.lat : 19.0760;
+    var boothLng = assignedBooth && assignedBooth.lng ? assignedBooth.lng : 72.8777;
     var weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + boothLat + '&longitude=' + boothLng + '&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FKolkata&forecast_days=3';
 
     function getWeatherLabel(code) {
