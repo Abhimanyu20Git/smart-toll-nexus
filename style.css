@@ -1232,6 +1232,87 @@ body.dark .auth-card {
     background: var(--card-bg);
 }
 
+body.dark .weather-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+body.dark .weather-details span {
+    color: #b0bec5;
+}
+
+body.dark .forecast-day {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .forecast-range {
+    color: #90a4ae;
+}
+
+body.dark .qr-pass-card {
+    background: var(--card-bg);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .qr-code img {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark .qr-vehicle {
+    color: #e0e0e0;
+}
+
+body.dark .qr-label {
+    color: #90a4ae;
+}
+
+body.dark .nearest-booth-card {
+    background: var(--card-bg);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .nearest-result {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .nearest-location {
+    color: #90a4ae;
+}
+
+body.dark .nearest-stats span {
+    color: #b0bec5;
+}
+
+body.dark .chart-container,
+body.dark .chart-container-sm {
+    background: var(--card-bg);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark #boothMap {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .api-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+}
+
+body.dark .api-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .api-card p {
+    color: #90a4ae;
+}
+
+body.dark .cta-action {
+    background: linear-gradient(135deg, #0f3460, #0d6b5e);
+}
+
 .landing-dark-toggle {
     position: fixed;
     top: 16px;
